@@ -18,7 +18,9 @@ def localReleaseDest = "${buildDir}/release/${version}"
 
 task androidJavadocs(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))//+ configurations.compile
+//    classpath += configurations.javadocDeps
+    failOnError false//强制忽略引用错误终止
 }
 
 task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
